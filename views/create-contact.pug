@@ -1,0 +1,23 @@
+extends layout 
+
+block content 
+    h1 #{title}
+    form(action="create-contact", method="POST")
+        div
+            label(for="firstName") First Name:
+            input(type="text", name="firstName", id="firstName", required)
+        br
+        div
+            label(for="lastName") Last Name:
+            input(type="text", name="lastName", id="lastName", required)
+        br
+        div
+            label(for="email") Email:
+            input(type="email", name="email", id="email")
+        br
+        div
+            label(for="notes") Notes:
+            textarea(name="notes", id="notes")
+        br
+        div
+            button(type="submit") Create Contact
