@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 #{title}
+  p This is a simple application for managing your contacts.
+  p Please click the button below to view your contacts database.
+  button 
+    a(href="/contacts") View Contacts Database
