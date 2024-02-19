@@ -23,7 +23,7 @@ router.post('/create-contact', (req, res, next) => {
   const uuid = crypto.randomUUID();
   const date = new Date();
   const formattedDate = date.toLocaleString('en-US', { timeZone: 'UTC' });
-  const newContact = { id: uuid, firstName: firstName, lastName: lastName, email: email, lastUpdateDate: formattedDate};
+  const newContact = { id: uuid, firstName: firstName, lastName: lastName, email: email, notes: notes, lastUpdateDate: formattedDate};
   contactRepo.addNewContact(uuid, newContact);
   res.redirect('/contacts');
 });
@@ -42,8 +42,8 @@ router.post('/:id/edit', (req, res, next) => {
   } 
   const date = new Date();
   const formattedDate = date.toLocaleString('en-US', { timeZone: 'UTC' });
-  const editedContact = { id: req.params.id, firstName: firstName, lastName: lastName, email: email, lastUpdateDate: formattedDate};
-  contactRepo.updateExistingContact(editedContact);
+  const editedContact = { id: req.params.id, firstName: firstName, lastName: lastName, email: email, notes: notes, lastUpdateDate: formattedDate};
+  contactRepo.updateExistingContact(editedContact);  
   res.redirect('/contacts');
 });
 
