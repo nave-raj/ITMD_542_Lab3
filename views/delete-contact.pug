@@ -1,8 +1,11 @@
 extends layout 
 
 block content 
-    p  Are you sure you want to delete the Contact Details of #{contact.firstName}
-    form(method='POST' action=`/contacts/${contact.id}/delete`)
-        button(type='submit') Confirm Delete
-        br
-        a(href=`/contacts/${contact.id}`) Cancel
+     div.container-fluid
+      div.row.align-items-center.justify-content-center.vh-100
+        div.col-6.text-center.card
+            div.p-10.m-10
+                p.h5  Are you sure you want to delete the Contact Details of #{contact.firstName}?
+            form(method='POST' action=`/contacts/${contact.id}/delete`)
+                button(type='submit').btn.btn-danger.m-10 Confirm Delete
+                a(href=`/contacts/${contact.id}`).btn.btn-primary.m-10 Cancel

@@ -1,8 +1,14 @@
 extends layout
 
 block content
-  h1 #{title}
-  p This is a simple application for managing your contacts.
-  p Please click the button below to view your contacts database.
-  button 
-    a(href="/contacts") View Contacts Database
+  div.container-fluid
+      div.row.align-items-center.justify-content-center.vh-100
+        div.col-12.text-center
+          h1 #{title}
+          p.pt-10 This is a simple application for managing your contacts.
+          p.pt-10 Click the button below to view your contacts database.
+          br
+          a(href="/contacts").btn.btn-primary.pb-10.m-10 View Contacts Database
+          br
+          p.pt-10.m-10 Directory of Naveena Kandasamy Rajkumar
+          p Email: nkandasamyrajkumar@hawk.iit.edu

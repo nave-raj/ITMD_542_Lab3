@@ -1,19 +1,31 @@
 extends layout 
 
 block content 
-    h1 Contact Details of #{contact.firstName}
-    div 
-        p First Name:   #{contact.firstName}
-    div 
-        p Last Name:   #{contact.lastName}
-    div 
-        p Email:   #{contact.email}
-    if contact.notes  
-        div 
-            p Note:   #{contact.notes}  
-    div 
-        p Last Update Date:   #{contact.lastUpdateDate}     
-    div.contact-action
-        a(href=`/contacts/${contact.id}/edit`) Edit Contact
-        br
-        a(href=`/contacts/${contact.id}/delete`) Delete Contact
+  div.container-fluid
+      div.row.align-items-center.justify-content-center.vh-100
+        div.col-6.text-center.card.m-10
+            h2.mb-10.m-10.pb-10 Contact Details of #{contact.firstName}
+            div.container
+                table.mx-auto
+                    tbody
+                        tr
+                            td.h5.pr-10 First Name :
+                            td.pl-10 #{contact.firstName}
+                        tr
+                            td.h5.pr-10 Last Name :
+                            td.pl-10 #{contact.lastName}
+                        tr  
+                            td.h5.pr-10 Email :
+                            td.pl-10 #{contact.email}
+                        if contact.notes 
+                            tr 
+                                td.h5.pr-10 Notes :
+                                td.pl-10 #{contact.notes}
+                        tr 
+                            td.h5 Last Update Date:
+                            td.pl-10 #{contact.lastUpdateDate} 
+                div.m-10
+                    a(href=`/contacts/${contact.id}/edit`).btn.btn-outline-primary.m-10 Edit Contact
+                    a(href=`/contacts/${contact.id}/delete`).btn.btn-outline-danger.m-10 Delete Contact
+                    a(href ="/contacts").btn.btn-primary.m-10 Go Back
+
