@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 
 /* GET Create Contact Page */
 router.get('/create-contact', (req, res, next) => {
-  res.render('create-contact',{title: 'Create a New Contact'});
+  res.render('create-or-edit-contact',{title: 'Create a New Contact', buttonText: 'Create Contact', actionURL: 'create-contact'});
 });
 
 /* POST Contact Details from Create Contact Page */
@@ -21,8 +21,29 @@ router.post('/create-contact', (req, res, next) => {
       return res.status(400).json({ message: 'Name and email are required' });
   }
   const uuid = crypto.randomUUID();
-  const newContact = { id: uuid, firstName: firstName, lastName: lastName, email: email };
+  const date = new Date();
+  const formattedDate = date.toLocaleString('en-US', { timeZone: 'UTC' });
+  const newContact = { id: uuid, firstName: firstName, lastName: lastName, email: email, lastUpdateDate: formattedDate};
   contactRepo.addNewContact(uuid, newContact);
+  res.redirect('/contacts');
+});
+
+/* GET Edit Contact Page */
+router.get('/:id/edit', (req, res, next) => {
+  const editContactData = contactRepo.findContactById(req.params.id);
+  res.render('create-or-edit-contact',{title: 'Edit Contact', buttonText: 'Edit Contact', contact: editContactData, actionURL: `edit`});
+});
+
+/* POST Edit Contact */
+router.post('/:id/edit', (req, res, next) => {
+  const {firstName, lastName, email, notes} = req.body;
+  if (!firstName || !email || !lastName) {
+    return res.status(400).json({ message: 'Name and email are required' });
+  } 
+  const date = new Date();
+  const formattedDate = date.toLocaleString('en-US', { timeZone: 'UTC' });
+  const editedContact = { id: req.params.id, firstName: firstName, lastName: lastName, email: email, lastUpdateDate: formattedDate};
+  contactRepo.updateExistingContact(editedContact);
   res.redirect('/contacts');
 });
 

@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+    h1 #{title}
+    div
+        form(action= actionURL, method="POST")
+            div
+                label(for="firstName") First Name:
+                input(type="text", name="firstName", id="firstName", value = (contact && contact.firstName)? contact.firstName : "", required)
+            br
+            div
+                label(for="lastName") Last Name:
+                input(type="text", name="lastName", id="lastName", value = (contact && contact.lastName)? contact.lastName : "", required)
+            br
+            div
+                label(for="email") Email:
+                input(type="email", name="email", id="email", value = (contact && contact.email)? contact.email : "",required)
+            br
+            div
+                label(for="notes") Notes:
+                textarea(name="notes", id="notes", value = (contact && contact.notes)? contact.notes : "")
+            br
+            div
+                button(type="submit") #{buttonText}
