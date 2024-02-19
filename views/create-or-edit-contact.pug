@@ -7,18 +7,22 @@ block content
             div.card-header.text-center.p-10
                 h2 #{title}
             div.card-body.p-10.m-10
+                if msg 
+                    each val in msg
+                        ul 
+                            li.red= val.msg
                 form(action= actionURL, method="POST")
                     div
                         label(for="firstName").form-label.h5 First Name:
-                        input(type="text", name="firstName", id="firstName", value = (contact && contact.firstName)? contact.firstName : "", required).form-control
+                        input(type="text", name="firstName", id="firstName", value = (contact && contact.firstName)? contact.firstName : "").form-control
                     br
                     div
                         label(for="lastName").form-label.h5 Last Name:
-                        input(type="text", name="lastName", id="lastName", value = (contact && contact.lastName)? contact.lastName : "", required).form-control
+                        input(type="text", name="lastName", id="lastName", value = (contact && contact.lastName)? contact.lastName : "").form-control
                     br
                     div
                         label(for="email").form-label.h5 Email:
-                        input(type="email", name="email", id="email", value = (contact && contact.email)? contact.email : "",required).form-control
+                        input(type="email", name="email", id="email", value = (contact && contact.email)? contact.email : "").form-control
                     br
                     div
                         label(for="notes").form-label.h5 Notes:

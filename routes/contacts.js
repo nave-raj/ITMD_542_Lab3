@@ -1,6 +1,7 @@
 var express = require('express');
 var crypto = require('node:crypto');
 var router = express.Router();
+const { body, validationResult } = require('express-validator');
 const contactRepo = require('../src/contactsRepository');
 
 /* GET all contacts listing */
@@ -15,10 +16,17 @@ router.get('/create-contact', (req, res, next) => {
 });
 
 /* POST Contact Details from Create Contact Page */
-router.post('/create-contact', (req, res, next) => {
+router.post('/create-contact', body('firstName').trim().escape().notEmpty().withMessage('First Name Cannot Be Empty!'), 
+                body('lastName').trim().escape().notEmpty().withMessage('Last Name Cannot be Empty!'),
+                body('email').trim().escape().notEmpty().withMessage('Email cannot be Empty!').isEmail().withMessage('Enter a valid Email'),
+                body('notes').trim().escape(), (req, res, next) => {
+  const result = validationResult(req);
+  if(!result.isEmpty()){
+    res.render('create-or-edit-contact',{title: 'Create a New Contact', buttonText: 'Create Contact', actionURL: 'create-contact',msg: result.array()});
+  }
   const { firstName, lastName, email, notes } = req.body;
   if (!firstName || !email || !lastName) {
-      return res.status(400).json({ message: 'Name and email are required' });
+    return res.status(400).json({ message: 'Name and email are required' });
   }
   const uuid = crypto.randomUUID();
   const date = new Date();
