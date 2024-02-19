@@ -1,7 +1,18 @@
 extends layout 
 
 block content 
-    h1 Contact Details #{contact.firstName}
+    h1 Contact Details of #{contact.firstName}
+    div 
+        p First Name:   #{contact.firstName}
+    div 
+        p Last Name:   #{contact.lastName}
+    div 
+        p Email:   #{contact.email}
+    if contact.notes  
+        div 
+            p Note:   #{contact.notes}  
+    div 
+        p Last Update Date:   #{contact.lastUpdateDate}     
     div.contact-action
         a(href=`/contacts/${contact.id}/edit`) Edit Contact
         br
