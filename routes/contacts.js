@@ -43,7 +43,14 @@ router.get('/:id/edit', (req, res, next) => {
 });
 
 /* POST Edit Contact */
-router.post('/:id/edit', (req, res, next) => {
+router.post('/:id/edit', body('firstName').trim().escape().notEmpty().withMessage('First Name Cannot Be Empty!'), 
+                  body('lastName').trim().escape().notEmpty().withMessage('Last Name Cannot be Empty!'),
+                  body('email').trim().escape().notEmpty().withMessage('Email cannot be Empty!').isEmail().withMessage('Enter a valid Email'),
+                  body('notes').trim().escape(), (req, res, next) => {
+  const result = validationResult(req);
+  if(!result.isEmpty()){
+    res.render('create-or-edit-contact',{title: 'Create a New Contact', buttonText: 'Create Contact', actionURL: 'create-contact',msg: result.array()});
+  }
   const {firstName, lastName, email, notes} = req.body;
   if (!firstName || !email || !lastName) {
     return res.status(400).json({ message: 'Name and email are required' });
