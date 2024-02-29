@@ -49,7 +49,7 @@ router.post('/:id/edit', body('firstName').trim().escape().notEmpty().withMessag
                   body('notes').trim().escape(), (req, res, next) => {
   const result = validationResult(req);
   if(!result.isEmpty()){
-    res.render('create-or-edit-contact',{title: 'Create a New Contact', buttonText: 'Create Contact', actionURL: 'create-contact',msg: result.array()});
+    res.render('create-or-edit-contact',{title: 'Create a New Contact', buttonText: 'Create Contact', actionURL: 'create-contact', msg: result.array()});
   }
   const {firstName, lastName, email, notes} = req.body;
   if (!firstName || !email || !lastName) {
