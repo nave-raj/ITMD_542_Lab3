@@ -2,7 +2,7 @@ var express = require('express');
 var crypto = require('node:crypto');
 var router = express.Router();
 const { body, validationResult } = require('express-validator');
-const contactRepo = require('../src/contactsRepository');
+const contactRepo = require('../src/contactsSQLiteRepository');
 
 /* GET all contacts listing */
 router.get('/', (req, res, next) => {
