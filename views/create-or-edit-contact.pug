@@ -1,33 +1,34 @@
-extends layout 
+extends layout
 
-block content 
-    div.container-fluid.w-75
-      div.row.align-items-center.justify-content-center.vh-90
-        div.col-12.card
-            div.card-header.text-center.p-10
-                h2 #{title}
-            div.card-body.p-10.m-10
-                if msg 
-                    each val in msg
-                        ul 
-                            li.red= val.msg
-                form(action= actionURL, method="POST")
-                    div
-                        label(for="firstName").form-label.h5 First Name:
-                        input(type="text", name="firstName", id="firstName", value = (contact && contact.firstName)? contact.firstName : "").form-control
-                    br
-                    div
-                        label(for="lastName").form-label.h5 Last Name:
-                        input(type="text", name="lastName", id="lastName", value = (contact && contact.lastName)? contact.lastName : "").form-control
-                    br
-                    div
-                        label(for="email").form-label.h5 Email:
-                        input(type="email", name="email", id="email", value = (contact && contact.email)? contact.email : "").form-control
-                    br
-                    div
-                        label(for="notes").form-label.h5 Notes:
-                        textarea(name="notes", id="notes", value = (contact && contact.notes)? contact.notes : "").form-control
-                    br
-                    div
-                        button(type="submit").btn.btn-primary.pt-10.m-10 #{buttonText}
-                        a(href ="/contacts").btn.btn-primary.pt-10.m-10 Go Back
+block content
+  div.container-fluid.w-75
+    div.row.align-items-center.justify-content-center.vh-90
+      div.col-12.card
+        div.card-header.text-center.p-10
+          h2 #{title}
+        div.card-body.p-10.m-10
+          if msg
+            each val in msg
+              ul
+                li.red= val.msg
+          form(action= actionURL, method="POST")
+            div
+              label(for="firstName").form-label.h5 First Name:
+              input(type="text", name="firstName", id="firstName", value = (contact && contact.firstName)? contact.firstName : "").form-control
+            br
+            div
+              label(for="lastName").form-label.h5 Last Name:
+              input(type="text", name="lastName", id="lastName", value = (contact && contact.lastName)? contact.lastName : "").form-control
+            br
+            div
+              label(for="email").form-label.h5 Email:
+              input(type="email", name="email", id="email", value = (contact && contact.email)? contact.email : "").form-control
+            br
+            div
+              label(for="notes").form-label.h5 Notes:
+              textarea(name="notes", id="notes", class="form-control")
+                | #{contact && contact.notes ? contact.notes : ''}
+            br
+            div
+              button(type="submit").btn.btn-primary.pt-10.m-10 #{buttonText}
+              a(href ="/contacts").btn.btn-primary.pt-10.m-10 Go Back
